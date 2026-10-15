@@ -1,0 +1,18 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Private key
+*.pem
+
+# OS files
+.DS_Store
+Thumbs.db
