@@ -113,14 +113,15 @@ resource "aws_instance" "web" {
 
   vpc_security_group_ids = [aws_security_group.web.id]
 
-    user_data = <<-EOF
-                #!/bin/bash
-                sudo apt update -y
-                sudo apt install -y nginx
-                sudo systemctl start nginx
-                sudo systemctl enable nginx
-                echo "<h1>Hello World</h1>" > /var/www/html/index.html
-                EOF
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo apt update -y
+              sudo apt install -y nginx
+              sudo systemctl start nginx
+              sudo systemctl enable nginx
+              echo "<h1>Hello World</h1>" | sudo tee /var/www/html/index.html
+              EOF
+
 
   tags = {
     Name = "web-server"
