@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-west-2"
+  region = var.region
 }
 
 # VPC
@@ -105,8 +105,8 @@ resource "local_file" "private_key" {
 
 # EC2 Instance
 resource "aws_instance" "web" {
-  ami           = "ami-02167eae61967e403"
-  instance_type = "t2.micro"
+  ami           = var.ami_id
+  instance_type = var.instance_type
   subnet_id     = aws_subnet.public.id
   key_name      = aws_key_pair.deployer.key_name
   associate_public_ip_address = true
@@ -116,11 +116,11 @@ resource "aws_instance" "web" {
   user_data = <<-EOF
               #!/bin/bash
               exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
-              sudo yum update -y
-              sudo amazon-linux-extras install nginx1 -y
+              sudo apt update -y
+              sudo apt install -y nginx
               sudo systemctl start nginx
               sudo systemctl enable nginx
-              echo "<h1>Hello World from Terraform!</h1>" | sudo tee /usr/share/nginx/html/index.html
+              echo "<h1>Hello World from Terraform!</h1>" | sudo tee /var/www/html/index.html
               sudo systemctl restart nginx
               EOF
 

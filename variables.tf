@@ -1,6 +1,6 @@
 variable "region" {
   description = "AWS region"
-  default     = "us-east-1"
+  default     = "us-west-2"
 }
 
 variable "instance_type" {
@@ -10,5 +10,5 @@ variable "instance_type" {
 
 variable "ami_id" {
   description = "AMI ID for EC2 instance"
-  default     = "ami-0c55b159cbfafe1f0"
+  default     = "ami-05b363f96065c0f5c"
 }
