@@ -116,9 +116,9 @@ resource "aws_instance" "web" {
     user_data = <<-EOF
                 #!/bin/bash
                 sudo apt update -y
-                sudo apt install -y apache2
-                sudo systemctl start apache2
-                sudo systemctl enable apache2
+                sudo apt install -y nginx
+                sudo systemctl start nginx
+                sudo systemctl enable nginx
                 echo "<h1>Hello World</h1>" > /var/www/html/index.html
                 EOF
 
