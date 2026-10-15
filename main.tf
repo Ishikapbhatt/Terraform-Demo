@@ -116,12 +116,12 @@ resource "aws_instance" "web" {
   user_data = <<-EOF
               #!/bin/bash
               exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
-              sudo apt update -y
-              sudo apt install -y nginx
-              sudo systemctl start nginx
-              sudo systemctl enable nginx
+              sudo yum update -y
+              sudo yum install -y httpd
+              sudo systemctl start httpd
+              sudo systemctl enable httpd
               echo "<h1>Hello World from Terraform!</h1>" | sudo tee /var/www/html/index.html
-              sudo systemctl restart nginx
+              sudo systemctl restart httpd
               EOF
 
 
